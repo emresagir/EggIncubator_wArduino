@@ -1,6 +1,7 @@
 #include <dht.h>
 #include <Wire.h> // Library for I2C communication
 #include <LiquidCrystal_I2C.h> // Library for LCD
+//Test for Git
 
 dht DHT;
 LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
