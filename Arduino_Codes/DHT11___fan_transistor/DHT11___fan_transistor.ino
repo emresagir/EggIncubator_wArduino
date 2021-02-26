@@ -28,22 +28,7 @@ void loop() {
  
  //Accurate value detection
   HumidFunc();
-  if (humid > 0){
-         Serial.print(DHT.humidity);
-         Serial.print("humidity ---- temp");
-         Serial.println(DHT.temperature);
-         correctHumid = DHT.humidity; // We dont want to use -999 value
-                               // because of the dht11's frequency 
-                               //we can read 1 time in a second
-                               //with this we only take correct value
-    if(humid > 30){
-        
-         digitalWrite(fanPin, HIGH);
-        
-    }
-    if(humid <= 25){
-        digitalWrite(fanPin, LOW);
-    }
+  
 
  //LCD part
   lcd.setCursor(1, 0);
