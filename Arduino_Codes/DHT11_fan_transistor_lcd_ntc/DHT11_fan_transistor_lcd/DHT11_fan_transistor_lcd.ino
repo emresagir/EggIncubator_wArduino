@@ -8,6 +8,7 @@ LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
 int dht11Pin = 4;
 int fanPin = 7;
 int thermistorPin = 0;
+int relayPin = 2;
 
 double humid, temp, correctHumid, correctTemp;
 
@@ -19,7 +20,9 @@ float c1 = 1.009249522e-03, c2 = 2.378405444e-04, c3 = 2.019202697e-07;
 int del = 500;
 void setup() {
   pinMode(fanPin, OUTPUT);
+  pinMode(relayPin, OUTPUT);
   digitalWrite(fanPin, LOW);
+  digitalWrite(relayPin, LOW);
   Serial.begin(9600);
   lcd.init();
   lcd.backlight();
@@ -37,7 +40,9 @@ void loop() {
  humidFanControlFunc();
  
  tempFunc();
+
  
+ tempCheckRelay(Tc);
  //LCD part
  lcdFunc();
 
@@ -100,4 +105,13 @@ void tempFunc(){
   Serial.print(" F; ");
   Serial.print(Tc);
   Serial.println(" C");
+}
+
+void tempCheckRelay(float temp){
+  if (temp > 38.5){
+    digitalWrite(relayPin, LOW);
+  }
+  if (temp < 37.5){
+    digitalWrite(relayPin, HIGH);
+  }
 }
